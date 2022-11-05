@@ -20,6 +20,7 @@ os.system("unzip methods.zip")
 os.system("unzip ATLAS-METHODS.zip")
 os.system("mv ATLAS-METHODS methods")
 os.system("cd methods && chmod +x *")
+os.system("rm -rf methods.zip ATLAS-METHODS.zip")
 
 console = Console()
 tasks = [f"task {n}" for n in range(1, 3)]
