@@ -13,11 +13,19 @@ try:
 except:
     if sys.platform.startswith("linux"):
         os.system("pip3 install colorama && pip3 install rich && pip install unzip")
-	os.system("unzip methods.zip && unzip ATLAS-METHODS.zip && mv ATLAS-METHODS methods && cd methods && chmod +x *")
+	os.system("unzip methods.zip")
+	os.system("unzip ATLAS-METHODS.zip")
+	os.system("mv ATLAS-METHODS methods")
+	os.system("cd methods && chmod +x *")
     elif sys.platform.startswith("freebsd"):
         os.system("pip3 install colorama && pip3 install rich && pip install unzip")
-	os.system("unzip methods.zip && unzip ATLAS-METHODS.zip && mv ATLAS-METHODS methods && cd methods && chmod +x *")
+	os.system("unzip methods.zip")
+	os.system("unzip ATLAS-METHODS.zip")
+	os.system("mv ATLAS-METHODS methods")
+	os.system("cd methods && chmod +x *")
 
+	
+	
 console = Console()
 tasks = [f"task {n}" for n in range(1, 3)]
 
