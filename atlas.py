@@ -15,11 +15,10 @@ except:
         os.system("pip3 install colorama && pip3 install rich && pip install unzip")
     elif sys.platform.startswith("freebsd"):
         os.system("pip3 install colorama && pip3 install rich && pip install unzip")
-
-os.system("cd methods && chmod +x *")
-
+        
 os.system("unzip methods.zip")
 os.system("unzip ATLAS-METHODS.zip && mv ATLAS-METHODS methods")
+os.system("cd methods && chmod +x *")
 
 console = Console()
 tasks = [f"task {n}" for n in range(1, 3)]
