@@ -8,5 +8,7 @@ pip3 install -r requirements.txt
 ```
 
 #Screenshot
+<center>
 <img src="https://i.ibb.co/DDmNZPK/image.png">
+<br>
 <img src="https://i.ibb.co/dpnY5Ls/image.png">
