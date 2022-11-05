@@ -7,7 +7,7 @@ Unpack the Methods.zip and Put it on AtlasAPI_Methods directory, and execute the
 pip3 install -r requirements.txt
 ```
 
-#Screenshot
+# Screenshot
 <center>
 <img src="https://i.ibb.co/DDmNZPK/image.png">
 <br>
