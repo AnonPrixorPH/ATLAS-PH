@@ -1,5 +1,0 @@
-uncompress the methods.zip and the ATLAS-METHODS, then put the ATLAS-METHODS in the methods directory
-
-1. Extract the methods.zip
-
-2. Extract the ATLAS-METHODS and move the file to the methods dir
