@@ -7,8 +7,6 @@ from subprocess import run
 from time import sleep
 from shutil import which
 
-require_module = ['colorama', 'rich', 'httpx']
-
 try:
 	requests = __import__("httpx") # httpx is faster than requests
 	from colorama import Fore, Back, Style
@@ -155,8 +153,7 @@ def userinfo():
     """)
     repeater()
 
-def launchflood():
-	OSclear()
+def methodbanner():
 	print("""
 ╔═════════════════╦═══════════════════════╦══════════════════════╦═════════════════════╗
 ║    \033[1;37;40mMETHODS      \033[1;31;40m║      \033[1;37;40mINFORMATION      \033[1;31;40m║      \033[1;37;40mPERMISSION      \033[1;31;40m║       \033[1;37;40mSTATUS        \033[1;31;40m║
@@ -172,6 +169,10 @@ def launchflood():
 ║   \033[1;36;40mATLAS-UAM     \033[1;31;40m║ \033[1;36;40mBYPASS CLOUDFLARE UAM \033[1;31;40m║      \033[1;36;40mFREE-USER       \033[1;31;40m║     \033[1;31;47mUNAVAILABLE\033[1;31;40m     ║
 ╚═════════════════╩═══════════════════════╩══════════════════════╩═════════════════════╝
     """)
+  
+def launchflood():
+	OSclear()
+	methodbanner()
 	while 1:
 		methods = input("[X] Choose Methods: ")
 		if methods in ["ATLAS-YOLANDA", "atlas-yolanda"]:
@@ -215,6 +216,8 @@ def launchflood():
 			repeater()
 		elif methods in "":
 			pass
+		elif methods in ["clear", "CLEAR", "cls", "CLS"]:
+			OSclear(); methodbanner()
 		elif methods in ["stop", "STOP"]:
 			run(["pkill screen"], shell=True)
 			print("[+] Attack Stopped!")
