@@ -7,7 +7,7 @@ Direction:
 Unpack the Methods.zip and Put it on AtlasAPI_Methods directory, and execute the atlas.py
 ```
 
-#INSTALL
+# INSTALL
 ```
 git clone https://github.com/AnonPrixorPH/ATLAS-PH.git; cd ATLAS-PH
 
