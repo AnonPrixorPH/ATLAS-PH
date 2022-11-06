@@ -16,12 +16,6 @@ try:
 except Exception:
 	exit("[X] Error? try this pip3 install requirements.txt")
 
-try:
-	for zipfile in ["methods.zip", "ATLAS-METHODS.zip"]:
-		os.remove(zipfile)
-except FileNotFoundError:
-	pass
-
 console = Console()
 tasks = [f"task {n}" for n in range(1, 3)]
 with console.status("[bold green]Finding missing on files...") as status:
