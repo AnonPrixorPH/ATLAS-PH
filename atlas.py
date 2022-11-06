@@ -130,13 +130,13 @@ def menu():
     """)
 	while 1:
 		choose1 = input("atlas-api@free@#~> ")
-		if (choose1 == "1"):
+		if choose1 in ["1", "user", "userinfo", "info"]:
 			userinfo()
-		elif (choose1 == "2"):
+		elif choose1 in ["2", "methods", "METHODS"]:
 			launchflood()
-		elif (choose1 == "3"):
+		elif choose1 in ["3", "fileupdate", "update"]:
 			fileupdate()
-		elif (choose1 == "dev"):
+		elif choose1 in ["dev", "developer"]:
 			developer()
 		elif (choose1 == ""):
 			pass
