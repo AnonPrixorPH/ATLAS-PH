@@ -47,7 +47,7 @@ def getproxy() -> None:
 				except KeyboardInterrupt:
 					exit()
 		print("[+] Attack Sent Successfully!!")
-		print("Type 'STOP' to stop your Attack.")
+		print("[+] Type 'STOP' to stop your Attack.")
 
 
 def OSclear():
