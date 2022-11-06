@@ -104,13 +104,13 @@ def banner():
 def repeater():
 	while 1:
 		repeat = input("[Atlas Bot] Do you want to go back to menu? [Y/N]: ")
-		if accept in ["y", "Y", "yes", "YES"]:
+		if repeat in ["y", "Y", "yes", "YES"]:
 			sleep(2)
 			print("[X] Proceeding...")
 			menu()
-		elif accept in ["n", "N", "no", "NO"]:
+		elif repeat in ["n", "N", "no", "NO"]:
 			exit()
-		elif accept in "":
+		elif repeat in "":
 			pass
 		else:
 			OSclear()
