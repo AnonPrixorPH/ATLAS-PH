@@ -1,1 +1,2 @@
-V2
+print("Under maintenance")
+sys.exit(0)
