@@ -5,8 +5,13 @@ Because I can't put everything in the same zip, github doesn't accept the file, 
 Direction:
 
 Unpack the Methods.zip and Put it on AtlasAPI_Methods directory, and execute the atlas.py
+```
 
-pip3 install -r requirements.txt
+#INSTALL
+```
+git clone https://github.com/AnonPrixorPH/ATLAS-PH.git; cd ATLAS-PH
+
+sh install.sh
 ```
 
 # Screenshot
