@@ -1,2 +1,0 @@
-print("Under maintenance")
-sys.exit(0)
